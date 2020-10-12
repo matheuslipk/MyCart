@@ -10,7 +10,7 @@ import IItemCart from '../../../../interfaces/IItemCart';
 
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
 import ButtonPrimary from '../../../../components/ButtonPrimary/ButtonPrimary';
-import { numberToPrice, priceToNumber } from '../../../../utils/prices';
+import { numberToPriceString, priceStringToNumber } from '../../../../utils/prices';
 
 const ModalNewItem = () => {
   const dispatch = useDispatch();
@@ -18,11 +18,11 @@ const ModalNewItem = () => {
 
   const setName2 = (t:string) => dispatch(CurrentItemCreators.setName(t));
   const setUnitPrice2 = (t:string) => {
-    const number = priceToNumber(t);
+    const number = priceStringToNumber(t);
     dispatch(CurrentItemCreators.setUnitPrice(number));
   };
   const setAmount2 = (t:string) => {
-    const number = priceToNumber(t);
+    const number = priceStringToNumber(t);
     dispatch(CurrentItemCreators.setAmount(number));
   };
 
@@ -55,14 +55,14 @@ const ModalNewItem = () => {
         <TextInput
           placeholder="Preco unitato"
           style={styles.input}
-          value={numberToPrice(current_item.unitPrice)}
+          value={numberToPriceString(current_item.unitPrice)}
           onChangeText={setUnitPrice2}
           keyboardType="numeric"
         />
         <TextInput
           placeholder="Quantidade"
           style={styles.input}
-          value={numberToPrice(current_item.amount)}
+          value={numberToPriceString(current_item.amount)}
           onChangeText={setAmount2}
           keyboardType="numeric"
         />

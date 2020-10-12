@@ -7,7 +7,7 @@ import ItemListCart from '../ItemListCart/ItemListCart';
 // import { Container } from './styles';
 
 const ListItens: React.FC = () => {
-  const { cart } = useSelector((state:IStateGlobal) => state);
+  const cart = useSelector((state:IStateGlobal) => state.cart);
   return (
     <View>
       {

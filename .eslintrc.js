@@ -30,6 +30,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'no-use-before-define': 'off',
     'no-param-reassign': 'off',
+    'import/prefer-default-export': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

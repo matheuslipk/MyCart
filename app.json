@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "myChart",
-    "slug": "myChart",
-    "version": "1.0.0",
+    "name": "myCart",
+    "slug": "myCart",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

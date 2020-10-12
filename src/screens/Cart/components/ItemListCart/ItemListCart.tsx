@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import IItemCArt from '../../interfaces/IItemCart';
+import IItemCArt from '../../../../interfaces/IItemCart';
 import styles from './styles';
 
 type PropsItemList = {
@@ -19,7 +19,7 @@ const ItemListCart = (props: PropsItemList) => {
       </View>
       <View style={styles.rowContainer}>
         <Text style={styles.textName}>Valor Unit</Text>
-        <Text>{priceFormated(item.unitePrice)}</Text>
+        <Text>{priceFormated(item.unitPrice)}</Text>
       </View>
       <View style={styles.rowContainer}>
         <Text style={styles.textName}>Quant</Text>
@@ -27,7 +27,7 @@ const ItemListCart = (props: PropsItemList) => {
       </View>
       <View style={styles.rowContainer}>
         <Text style={styles.textName}>Preço final</Text>
-        <Text>{priceFormated(item.unitePrice * item.amount)}</Text>
+        <Text>{priceFormated(item.unitPrice * item.amount)}</Text>
       </View>
     </View>
   );

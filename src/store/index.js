@@ -2,6 +2,7 @@
 /* eslint no-undef: "off" */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import cart from './ducks/cart';
+import components from './ducks/components';
 
 const logger = (store) => (next) => (action) => {
   console.log('dispatching', action);
@@ -27,6 +28,7 @@ const crashReporter = (store) => (next) => (action) => {
 
 const reducers = combineReducers({
   cart,
+  components,
 });
 
 const showStoreGlobalInLog = true;

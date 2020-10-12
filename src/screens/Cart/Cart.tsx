@@ -1,26 +1,28 @@
 import * as React from 'react';
-import { SafeAreaView, ScrollView, Text } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import { useDispatch } from 'react-redux';
-import ButtonNewItem from './components/ButtonNewItem/ButtonNewItem';
-import { Creators as CartCreators } from '../../store/ducks/cart';
+import { Creators as ComponentsCreators } from '../../store/ducks/components';
 import ListItens from './components/ListItens/ListItens';
+import ModalNewItem from './components/ModalNewItem/ModalNewItem';
+import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary';
 
 const screens: React.FC = () => {
   const dispatch = useDispatch();
-  const change = () => {
-    dispatch(CartCreators.addItem({
-      id: 21,
-      name: 'new prod',
-    }));
+
+  const showModalNewItem = () => {
+    dispatch(ComponentsCreators.setModalNewItemVisible(true));
   };
   return (
     <SafeAreaView>
-      <Text>Hello</Text>
       <ScrollView>
         <ListItens />
-        <ButtonNewItem onPress={change} />
+        <ButtonPrimary
+          onPress={showModalNewItem}
+          text="Novo item"
+          style={{ marginTop: 10 }}
+        />
       </ScrollView>
-
+      <ModalNewItem />
     </SafeAreaView>
   );
 };

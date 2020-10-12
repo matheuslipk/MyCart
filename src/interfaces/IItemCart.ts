@@ -2,7 +2,7 @@ interface IItemCArt {
   id: number;
   name: string;
   amount: number;
-  unitePrice: number;
+  unitPrice: number;
 }
 
 export default IItemCArt;

@@ -4,14 +4,7 @@ import ICart from '../../interfaces/ICart';
 import IItemCart from '../../interfaces/IItemCart';
 
 const INITIAL_STATE:ICart = {
-  itens: {
-    1: {
-      id: 1,
-      name: 'Arroz',
-      amount: 2,
-      unitePrice: 3.3,
-    },
-  },
+  itens: {},
   createdAt: '',
 };
 

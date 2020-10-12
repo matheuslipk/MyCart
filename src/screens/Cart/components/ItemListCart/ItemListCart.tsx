@@ -1,7 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import IItemCArt from '../../../../interfaces/IItemCart';
 import styles from './styles';
+import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
+import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
 
 type PropsItemList = {
   item: IItemCArt,
@@ -10,9 +13,14 @@ type PropsItemList = {
 const ItemListCart = (props: PropsItemList) => {
   const { item } = props;
   const priceFormated = (price:number) => (price ? `R$ ${price.toFixed(2)}` : 'R$ 0,00');
+  const dispatch = useDispatch();
+  const showModalEditind = () => {
+    dispatch(CurrentItemCreators.replace(item));
+    dispatch(ComponentsCreators.setModalNewItemVisible(true));
+  };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={showModalEditind}>
       <View style={styles.rowContainer}>
         <Text style={styles.textName}>Produto</Text>
         <Text>{item.name}</Text>
@@ -29,7 +37,7 @@ const ItemListCart = (props: PropsItemList) => {
         <Text style={styles.textName}>Preço final</Text>
         <Text>{priceFormated(item.unitPrice * item.amount)}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

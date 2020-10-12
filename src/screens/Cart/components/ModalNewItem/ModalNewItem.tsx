@@ -30,7 +30,7 @@ const ModalNewItem = () => {
 
   const handleNewItem = () => {
     dispatch(CartCreators.addItem({
-      id: Date.now(),
+      id: current_item.id || Date.now(),
       name: current_item.name,
       unitPrice: current_item.unitPrice,
       amount: current_item.amount,

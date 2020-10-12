@@ -9,7 +9,7 @@ export default StyleSheet.create({
   header: {
     display: 'flex',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 10,
   },
   btnBack: {
     display: 'flex',
@@ -19,7 +19,7 @@ export default StyleSheet.create({
   textHeader: {
     color: '#fff',
     fontSize: 18,
-    marginLeft: 4,
+    marginLeft: 10,
 
   },
 });

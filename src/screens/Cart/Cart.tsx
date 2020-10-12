@@ -19,7 +19,7 @@ const screens: React.FC = () => {
         <ButtonPrimary
           onPress={showModalNewItem}
           text="Novo item"
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 10, marginHorizontal: 4 }}
         />
       </ScrollView>
       <ModalNewItem />

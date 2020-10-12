@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-  Modal as ModalRN, SafeAreaView, View, Text, TouchableOpacity,
+  Modal as ModalRN, SafeAreaView, View, Text, TouchableOpacity, BackHandler,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -9,7 +9,7 @@ import { Creators as ComponentsCreators } from '../../store/ducks/components';
 import { Creators as CurrentItemCreators } from '../../store/ducks/current_item';
 
 type Props = {
-  children: React.ReactChild
+  children: React.ReactChild,
 }
 
 const Modal = ({ children }:Props) => {
@@ -20,7 +20,14 @@ const Modal = ({ children }:Props) => {
   const hideModalNewItem = () => {
     dispatch(ComponentsCreators.setModalNewItemVisible(false));
     clearInputs();
+    return true;
   };
+
+  useEffect(() => {
+    const handle = BackHandler.addEventListener('hardwareBackPress', hideModalNewItem);
+    return handle.remove();
+  }, []);
+
   return (
     <ModalRN transparent>
       <SafeAreaView style={styles.container}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../../components/Modal/Modal';
 import styles from './styles';
@@ -11,6 +11,7 @@ import IItemCart from '../../../../interfaces/IItemCart';
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
 import ButtonPrimary from '../../../../components/ButtonPrimary/ButtonPrimary';
 import { numberToPriceString, priceStringToNumber } from '../../../../utils/prices';
+import Input from '../../../../components/Input/Input';
 
 const ModalNewItem = () => {
   const dispatch = useDispatch();
@@ -46,22 +47,20 @@ const ModalNewItem = () => {
   return components.modalNewItemVisible ? (
     <Modal>
       <View style={styles.container}>
-        <TextInput
-          placeholder="Produto"
-          style={styles.input}
+        <Input
+          label="Produto"
           value={current_item.name}
           onChangeText={setName2}
         />
-        <TextInput
-          placeholder="Preco unitato"
-          style={styles.input}
+        <Input
+          label="Preço unitário"
           value={numberToPriceString(current_item.unitPrice)}
           onChangeText={setUnitPrice2}
           keyboardType="numeric"
         />
-        <TextInput
+        <Input
           placeholder="Quantidade"
-          style={styles.input}
+          label="Quantidade"
           value={numberToPriceString(current_item.amount)}
           onChangeText={setAmount2}
           keyboardType="numeric"

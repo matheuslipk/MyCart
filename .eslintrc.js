@@ -32,6 +32,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'import/prefer-default-export': 'off',
     'camelcase': 'off',
+    'react/require-default-props': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

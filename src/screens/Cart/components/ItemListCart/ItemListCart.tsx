@@ -1,10 +1,13 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  Text, View, TouchableOpacity, Alert,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import IItemCArt from '../../../../interfaces/IItemCart';
 import styles from './styles';
 import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
+import { Creators as CartCreators } from '../../../../store/ducks/cart';
 
 type PropsItemList = {
   item: IItemCArt,
@@ -19,8 +22,22 @@ const ItemListCart = (props: PropsItemList) => {
     dispatch(ComponentsCreators.setModalNewItemVisible(true));
   };
 
+  const handleDeleteItem = () => {
+    const deleteItem = () => {
+      dispatch(CartCreators.removeItem(item.id));
+    };
+    Alert.alert('Atenção', 'Deseja apagar o item selecionado?', [
+      { text: 'Sim', onPress: deleteItem },
+      { text: 'Não' },
+    ]);
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={showModalEditind}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={showModalEditind}
+      onLongPress={handleDeleteItem}
+    >
       <View style={styles.rowContainer}>
         <Text style={styles.textName}>Produto</Text>
         <Text>{item.name}</Text>

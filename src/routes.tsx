@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Screens from './screens';
+import { ThemeDefault } from './utils/constants';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +13,7 @@ const MainStack = () => (
 );
 
 export default () => (
-  <NavigationContainer>
+  <NavigationContainer theme={ThemeDefault}>
     <MainStack />
   </NavigationContainer>
 );

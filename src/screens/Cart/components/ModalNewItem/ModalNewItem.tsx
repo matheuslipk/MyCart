@@ -1,35 +1,39 @@
 import React from 'react';
-import {
-  Text, TouchableOpacity, View, TextInput,
-} from 'react-native';
+import { View, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../../components/Modal/Modal';
 import styles from './styles';
 import { Creators as CartCreators } from '../../../../store/ducks/cart';
+import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
 import IStateGlobal from '../../../../interfaces/IStateGlobal';
 import IItemCart from '../../../../interfaces/IItemCart';
 
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
+import ButtonPrimary from '../../../../components/ButtonPrimary/ButtonPrimary';
+import { numberToPrice, priceToNumber } from '../../../../utils/prices';
 
 const ModalNewItem = () => {
   const dispatch = useDispatch();
-  const { components } = useSelector((state:IStateGlobal) => state);
-  const [name, setName] = React.useState('');
-  const [unitPrice, setUnitPrice] = React.useState('');
-  const [amount, setAmount] = React.useState('');
+  const { components, current_item } = useSelector((state:IStateGlobal) => state);
 
-  const clearInputs = () => {
-    setName('');
-    setUnitPrice('');
-    setAmount('');
+  const setName2 = (t:string) => dispatch(CurrentItemCreators.setName(t));
+  const setUnitPrice2 = (t:string) => {
+    const number = priceToNumber(t);
+    dispatch(CurrentItemCreators.setUnitPrice(number));
   };
+  const setAmount2 = (t:string) => {
+    const number = priceToNumber(t);
+    dispatch(CurrentItemCreators.setAmount(number));
+  };
+
+  const clearInputs = () => dispatch(CurrentItemCreators.clear());
 
   const handleNewItem = () => {
     dispatch(CartCreators.addItem({
       id: Date.now(),
-      name,
-      unitPrice: Number.parseFloat(unitPrice),
-      amount: Number.parseFloat(amount),
+      name: current_item.name,
+      unitPrice: current_item.unitPrice,
+      amount: current_item.amount,
     } as IItemCart));
     clearInputs();
     hideModalNewItem();
@@ -42,34 +46,27 @@ const ModalNewItem = () => {
   return components.modalNewItemVisible ? (
     <Modal>
       <View style={styles.container}>
-        <View style={{ marginBottom: 20 }}>
-          <TouchableOpacity onPress={hideModalNewItem}>
-            <Text>Voltar</Text>
-          </TouchableOpacity>
-        </View>
         <TextInput
           placeholder="Produto"
           style={styles.input}
-          value={name}
-          onChangeText={setName}
+          value={current_item.name}
+          onChangeText={setName2}
         />
         <TextInput
           placeholder="Preco unitato"
           style={styles.input}
-          value={unitPrice}
-          onChangeText={setUnitPrice}
+          value={numberToPrice(current_item.unitPrice)}
+          onChangeText={setUnitPrice2}
           keyboardType="numeric"
         />
         <TextInput
           placeholder="Quantidade"
           style={styles.input}
-          value={amount}
-          onChangeText={setAmount}
+          value={numberToPrice(current_item.amount)}
+          onChangeText={setAmount2}
           keyboardType="numeric"
         />
-        <TouchableOpacity onPress={handleNewItem} style={styles.btnAdd}>
-          <Text style={styles.textBtn}>Adicionar</Text>
-        </TouchableOpacity>
+        <ButtonPrimary text="Adicionar" onPress={handleNewItem} style={styles.btnAdd} />
       </View>
     </Modal>
   ) : null;

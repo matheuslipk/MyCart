@@ -3,6 +3,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import cart from './ducks/cart';
 import components from './ducks/components';
+import current_item from './ducks/current_item';
 
 const logger = (store) => (next) => (action) => {
   console.log('dispatching', action);
@@ -29,6 +30,7 @@ const crashReporter = (store) => (next) => (action) => {
 const reducers = combineReducers({
   cart,
   components,
+  current_item,
 });
 
 const showStoreGlobalInLog = true;

@@ -3,19 +3,24 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../../components/Modal/Modal';
 import styles from './styles';
-import { Creators as CartCreators } from '../../../../store/ducks/cart';
+import { Creators as ItensOfCardCreators } from '../../../../store/ducks/itens_of_cart';
 import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
 import IStateGlobal from '../../../../interfaces/IStateGlobal';
-import IItemCart from '../../../../interfaces/IItemCart';
+import IItemCart from '../../../../interfaces/models/IItemCart';
 
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
 import ButtonPrimary from '../../../../components/ButtonPrimary/ButtonPrimary';
 import { numberToPriceString, priceStringToNumber } from '../../../../utils/prices';
 import Input from '../../../../components/Input/Input';
 
-const ModalNewItem = () => {
+type Props = {
+  cartId: number;
+}
+
+const ModalNewItem = ({ cartId }:Props) => {
   const dispatch = useDispatch();
-  const { components, current_item } = useSelector((state:IStateGlobal) => state);
+  const current_item = useSelector((state:IStateGlobal) => state.current_item);
+  const components = useSelector((state:IStateGlobal) => state.components);
 
   const setName2 = (t:string) => dispatch(CurrentItemCreators.setName(t));
   const setUnitPrice2 = (t:string) => {
@@ -30,8 +35,9 @@ const ModalNewItem = () => {
   const clearInputs = () => dispatch(CurrentItemCreators.clear());
 
   const handleNewItem = () => {
-    dispatch(CartCreators.addItem({
+    dispatch(ItensOfCardCreators.addItem(cartId, {
       id: current_item.id || Date.now(),
+      cartId,
       name: current_item.name,
       unitPrice: current_item.unitPrice,
       amount: current_item.amount,
@@ -65,7 +71,7 @@ const ModalNewItem = () => {
           onChangeText={setAmount2}
           keyboardType="numeric"
         />
-        <ButtonPrimary text="Adicionar" onPress={handleNewItem} style={styles.btnAdd} />
+        <ButtonPrimary text="Salvar" onPress={handleNewItem} style={styles.btnAdd} />
       </View>
     </Modal>
   ) : null;

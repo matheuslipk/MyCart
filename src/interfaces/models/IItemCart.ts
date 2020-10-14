@@ -1,8 +1,9 @@
-interface IItemCArt {
+interface IItemCart {
   id: number;
+  cartId: number;
   name: string;
   amount: number;
   unitPrice: number;
 }
 
-export default IItemCArt;
+export default IItemCart;

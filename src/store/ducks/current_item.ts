@@ -1,8 +1,9 @@
 import { createActions, createReducer } from 'reduxsauce';
-import IItemCart from '../../interfaces/IItemCart';
+import IItemCart from '../../interfaces/models/IItemCart';
 
 const INITIAL_STATE:IItemCart = {
   id: 0,
+  cartId: 0,
   name: '',
   amount: 0,
   unitPrice: 0,
@@ -14,6 +15,8 @@ export const { Types, Creators } = createActions({
   setAmount: ['amount'],
   setUnitPrice: ['unitPrice'],
   clear: [],
+}, {
+  prefix: '@current_item/',
 });
 
 const replace = (state = INITIAL_STATE, action:actionReplace) => ({

@@ -3,11 +3,11 @@ import {
   Text, View, TouchableOpacity, Alert,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import IItemCArt from '../../../../interfaces/IItemCart';
+import IItemCArt from '../../../../interfaces/models/IItemCart';
 import styles from './styles';
 import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
-import { Creators as CartCreators } from '../../../../store/ducks/cart';
+import { Creators as CartCreators } from '../../../../store/ducks/carts';
 
 type PropsItemList = {
   item: IItemCArt,

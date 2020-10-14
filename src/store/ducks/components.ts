@@ -7,6 +7,8 @@ const INITIAL_STATE:IComponents = {
 
 export const { Types, Creators } = createActions({
   setModalNewItemVisible: ['visible'],
+}, {
+  prefix: '@components/',
 });
 
 const setModalNewItemVisible = (state = INITIAL_STATE, action:actionSetModalNewItemVisible) => ({

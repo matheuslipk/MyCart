@@ -6,7 +6,7 @@ import ListItens from './components/ListItens/ListItens';
 import ModalNewItem from './components/ModalNewItem/ModalNewItem';
 import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary';
 
-const screens: React.FC = () => {
+const Cart = () => {
   const dispatch = useDispatch();
 
   const showModalNewItem = () => {
@@ -27,4 +27,4 @@ const screens: React.FC = () => {
   );
 };
 
-export default screens;
+export default Cart;

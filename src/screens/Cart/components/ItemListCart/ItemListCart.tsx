@@ -7,7 +7,7 @@ import IItemCArt from '../../../../interfaces/models/IItemCart';
 import styles from './styles';
 import { Creators as CurrentItemCreators } from '../../../../store/ducks/current_item';
 import { Creators as ComponentsCreators } from '../../../../store/ducks/components';
-import { Creators as CartCreators } from '../../../../store/ducks/carts';
+import { Creators as ItensOfCartCreators } from '../../../../store/ducks/itens_of_cart';
 
 type PropsItemList = {
   item: IItemCArt,
@@ -24,7 +24,7 @@ const ItemListCart = (props: PropsItemList) => {
 
   const handleDeleteItem = () => {
     const deleteItem = () => {
-      dispatch(CartCreators.removeItem(item.id));
+      dispatch(ItensOfCartCreators.deleteItem(item));
     };
     Alert.alert('Atenção', 'Deseja apagar o item selecionado?', [
       { text: 'Sim', onPress: deleteItem },

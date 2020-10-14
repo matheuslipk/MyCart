@@ -7,6 +7,7 @@ const INITIAL_STATE:IItensOfCart = {};
 
 export const { Types, Creators } = createActions({
   addItem: ['cartId', 'item'],
+  deleteItem: ['item'],
 }, {
   prefix: '@itens_of_cart/',
 });
@@ -16,11 +17,20 @@ const addItem = (state = INITIAL_STATE, action:actionAddItem) => produce(state, 
   draft[action.cartId][action.item.id] = action.item;
 }) as IItensOfCart;
 
+const deleteItem = (state = INITIAL_STATE, action:actionDeleteItem) => produce(state, (draft) => {
+  delete draft[action.item.cartId][action.item.id];
+}) as IItensOfCart;
+
 export default createReducer(INITIAL_STATE, {
   [Types.ADD_ITEM]: addItem,
+  [Types.DELETE_ITEM]: deleteItem,
 });
 
 type actionAddItem = {
   cartId: number;
+  item:IItemCart,
+}
+
+type actionDeleteItem = {
   item:IItemCart,
 }

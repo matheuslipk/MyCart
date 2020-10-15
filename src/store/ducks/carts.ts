@@ -3,17 +3,13 @@ import { produce } from 'immer';
 import ICart from '../../interfaces/models/ICart';
 import ICarts from '../../interfaces/models/ICarts';
 
-const INITIAL_STATE:ICarts = {
-  1: {
-    id: 1,
-    name: 'Cart 1',
-  },
-};
+const INITIAL_STATE:ICarts = {};
 
 export const { Types, Creators } = createActions({
   addCart: ['cart'],
   removeCart: ['idItem'],
   clearCarts: [],
+  replace: ['carts'],
 }, {
   prefix: '@carts/',
 });
@@ -29,10 +25,15 @@ const removeCart = (state = INITIAL_STATE, action:actionRemoveCart) => produce(s
 
 const clearCarts = () => INITIAL_STATE;
 
+const replace = (state = INITIAL_STATE, action:actionReplace) => produce(state, () => ({
+  ...action.carts,
+}));
+
 export default createReducer(INITIAL_STATE, {
   [Types.ADD_CART]: addCart,
   [Types.REMOVE_CART]: removeCart,
   [Types.CLEAR_CARTS]: clearCarts,
+  [Types.REPLACE]: replace,
 });
 
 type actionAddCart = {
@@ -41,4 +42,8 @@ type actionAddCart = {
 
 type actionRemoveCart = {
   idCart: number,
+}
+
+type actionReplace = {
+  carts: ICarts,
 }

@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
-import ICart from '../../interfaces/models/ICart';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { IMainStackParamList } from '../../routes/interfaces';
-import * as selectorCarts from '../../store/selectors/carts';
+import List from './List/List';
+import { Creators } from '../../store/ducks/carts';
+import IItemCart from '../../interfaces/models/IItemCart';
 
 type ListCartsProp = StackNavigationProp<IMainStackParamList, 'ListCarts'>
 type Props = {
@@ -12,18 +13,20 @@ type Props = {
 }
 
 const ListCarts = ({ navigation }:Props) => {
-  const carts = useSelector(selectorCarts.arrayCarts) as ICart[];
-
+  const dispatch = useDispatch();
+  const handleNewCart = () => {
+    const newCart = {
+      id: Date.now(),
+      name: 'Novo',
+    } as IItemCart;
+    dispatch(Creators.addCart(newCart));
+  };
   return (
     <View>
-      {
-        carts.map((c) => (
-          <TouchableOpacity key={c.id} onPress={() => navigation.navigate('Cart', { id: c.id })}>
-            <Text>{c.name}</Text>
-          </TouchableOpacity>
-        ))
-      }
-
+      <List navigation={navigation} />
+      <TouchableOpacity onPress={handleNewCart}>
+        <Text>Novo</Text>
+      </TouchableOpacity>
     </View>
   );
 };

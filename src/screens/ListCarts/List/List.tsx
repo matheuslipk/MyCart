@@ -1,6 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import {
+  Alert,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +26,12 @@ const ItemList = ({ navigation, cart }:PropsItem) => {
 
   const dispatch = useDispatch();
   const handleDeleteCart = (cartId:number) => {
-    dispatch(CartCreators.removeCart(cartId));
+    const deleteCart = () => dispatch(CartCreators.removeCart(cartId));
+    Alert.alert('Apagar Carrinho?', 'Esse carrinho será excluido e todos os'
+    + ' itens dentro dele serão perdidos. Deseja mesmo fazer isso?', [
+      { text: 'Sim', onPress: deleteCart },
+      { text: 'Não' },
+    ]);
   };
 
   const handleEditCart = () => {

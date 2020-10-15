@@ -5,5 +5,5 @@ const Carts = (state:IStateGlobal) => state.carts;
 
 export const arrayCarts = createSelector(
   Carts,
-  (carts) => Object.values(carts),
+  (carts) => Object.values(carts).reverse(),
 );

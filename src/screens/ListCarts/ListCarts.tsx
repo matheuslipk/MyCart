@@ -28,6 +28,12 @@ const ListCarts = ({ navigation }:Props) => {
     dispatch(Creators.addCart(newCart));
   };
 
+  React.useEffect(() => {
+    navigation.setOptions({
+      title: 'Carrinhos',
+    });
+  }, []);
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>

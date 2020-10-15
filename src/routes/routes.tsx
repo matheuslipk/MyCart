@@ -9,8 +9,8 @@ const Stack = createStackNavigator<IMainStackParamList>();
 
 const MainStack = () => (
   <Stack.Navigator initialRouteName="ListCarts">
-    <Stack.Screen name="Cart" component={Screens.Cart} />
     <Stack.Screen name="ListCarts" component={Screens.ListCarts} />
+    <Stack.Screen name="Cart" component={Screens.Cart} />
   </Stack.Navigator>
 );
 

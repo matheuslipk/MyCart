@@ -12,11 +12,12 @@ type Props = {
 
 const ListItens = ({ cartId }:Props) => {
   const itensCart = useSelector((state:IStateGlobal) => state.itens_of_cart[cartId]);
-  const total = 0;
+  const arrayItens = itensCart ? Object.values(itensCart) : [];
+  const total = arrayItens.reduce((acum, current) => acum + current.unitPrice * current.amount, 0);
   return (
     <View>
       {
-        itensCart && Object.values(itensCart).map((i) => (
+        arrayItens.map((i) => (
           <ItemListCart key={i.id} item={i} />
         ))
       }

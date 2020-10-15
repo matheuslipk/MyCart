@@ -54,9 +54,10 @@ const ModalNewItem = ({ cartId }:Props) => {
     <Modal>
       <View style={styles.container}>
         <Input
-          label="Produto"
+          label="Nome do item"
           value={current_item.name}
           onChangeText={setName2}
+          placeholder="Ex: Carne, feijão carioca, cerveja etc..."
         />
         <Input
           label="Preço unitário"

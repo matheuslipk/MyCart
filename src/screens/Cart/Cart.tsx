@@ -23,7 +23,7 @@ const Cart = ({ route }:CartProp) => {
         <ListItens cartId={cartId} />
         <ButtonPrimary
           onPress={showModalNewItem}
-          text="Novo item"
+          text="Adicionar produto ao carrinho"
           style={{ marginTop: 10, marginHorizontal: 4 }}
         />
       </ScrollView>

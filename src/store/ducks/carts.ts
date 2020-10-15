@@ -10,9 +10,15 @@ export const { Types, Creators } = createActions({
   removeCart: ['cartId'],
   clearCarts: [],
   replace: ['carts'],
+  edit: ['cart'],
 }, {
   prefix: '@carts/',
 });
+
+const edit = (state = INITIAL_STATE, action:actionEdit) => (produce(state, (draft) => {
+  const { cart } = action;
+  draft[cart.id].name = cart.name;
+}));
 
 const addCart = (state = INITIAL_STATE, action:actionAddCart) => (produce(state, (draft) => {
   const newCart = action.cart;
@@ -34,7 +40,12 @@ export default createReducer(INITIAL_STATE, {
   [Types.REMOVE_CART]: removeCart,
   [Types.CLEAR_CARTS]: clearCarts,
   [Types.REPLACE]: replace,
+  [Types.EDIT]: edit,
 });
+
+type actionEdit = {
+  cart:ICart,
+}
 
 type actionAddCart = {
   cart:ICart,

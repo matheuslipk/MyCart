@@ -36,7 +36,7 @@ const reducers = combineReducers({
 
 const showStoreGlobalInLog = true;
 const middlewawre = (__DEV__ && showStoreGlobalInLog
-   && [logger, crashReporter, sagaMiddleware]) || [];
+   && [logger, crashReporter, sagaMiddleware]) || [sagaMiddleware];
 
 const store = createStore(reducers, applyMiddleware(...middlewawre));
 

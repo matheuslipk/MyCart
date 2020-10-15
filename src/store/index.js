@@ -1,10 +1,13 @@
 /* eslint no-console: "off" */
 /* eslint no-undef: "off" */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import carts from './ducks/carts';
 import components from './ducks/components';
 import current_item from './ducks/current_item';
 import itens_of_cart from './ducks/itens_of_cart';
+
+import cartSagas from './sagas/cartSagas';
 
 const logger = (store) => (next) => (action) => {
   console.log('dispatching', action);
@@ -22,6 +25,8 @@ const crashReporter = (store) => (next) => (action) => {
   }
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 const reducers = combineReducers({
   carts,
   components,
@@ -30,8 +35,11 @@ const reducers = combineReducers({
 });
 
 const showStoreGlobalInLog = true;
-const middlewawre = (__DEV__ && showStoreGlobalInLog && [logger, crashReporter]) || [];
+const middlewawre = (__DEV__ && showStoreGlobalInLog
+   && [logger, crashReporter, sagaMiddleware]) || [];
 
 const store = createStore(reducers, applyMiddleware(...middlewawre));
+
+sagaMiddleware.run(cartSagas);
 
 export default store;

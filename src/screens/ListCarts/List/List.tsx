@@ -3,12 +3,12 @@ import React from 'react';
 import {
   StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ICart from '../../../interfaces/models/ICart';
 import { IMainStackParamList } from '../../../routes/interfaces';
 import * as selectorsCart from '../../../store/selectors/carts';
 import { colors } from '../../../utils/constants';
-// import { Container } from './styles';
+import { Creators as CartCreators } from '../../../store/ducks/carts';
 
 type ListCartsProp = StackNavigationProp<IMainStackParamList, 'ListCarts'>
 type Props = {
@@ -17,6 +17,11 @@ type Props = {
 
 const ListCarts = ({ navigation }:Props) => {
   const carts = useSelector(selectorsCart.arrayCarts) as ICart[];
+  const dispatch = useDispatch();
+
+  const handleDeleteCart = (cartId:number) => {
+    dispatch(CartCreators.removeCart(cartId));
+  };
 
   return (
     <View>
@@ -26,6 +31,7 @@ const ListCarts = ({ navigation }:Props) => {
             style={styles.btn}
             key={c.id}
             onPress={() => navigation.navigate('Cart', { id: c.id })}
+            onLongPress={() => handleDeleteCart(c.id)}
           >
             <Text>{c.name}</Text>
           </TouchableOpacity>

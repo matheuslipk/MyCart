@@ -7,7 +7,7 @@ const INITIAL_STATE:ICarts = {};
 
 export const { Types, Creators } = createActions({
   addCart: ['cart'],
-  removeCart: ['idItem'],
+  removeCart: ['cartId'],
   clearCarts: [],
   replace: ['carts'],
 }, {
@@ -20,7 +20,7 @@ const addCart = (state = INITIAL_STATE, action:actionAddCart) => (produce(state,
 }));
 
 const removeCart = (state = INITIAL_STATE, action:actionRemoveCart) => produce(state, (draft) => {
-  delete draft[action.idCart];
+  delete draft[action.cartId];
 });
 
 const clearCarts = () => INITIAL_STATE;
@@ -41,7 +41,7 @@ type actionAddCart = {
 }
 
 type actionRemoveCart = {
-  idCart: number,
+  cartId: number,
 }
 
 type actionReplace = {

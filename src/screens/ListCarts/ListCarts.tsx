@@ -21,6 +21,7 @@ const ListCarts = ({ navigation }:Props) => {
     } as IItemCart;
     dispatch(Creators.addCart(newCart));
   };
+
   return (
     <View>
       <List navigation={navigation} />
